@@ -43,6 +43,9 @@ class ResultsViewController: UIViewController {
     }
     */
 
+    @IBAction func backToStartPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {

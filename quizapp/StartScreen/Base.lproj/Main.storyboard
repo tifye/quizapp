@@ -385,8 +385,23 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxe-Jf-LvF" customClass="AppUIButton" customModule="quizapp" customModuleProvider="target">
+                                        <rect key="frame" x="157" y="8" width="100" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="gBw-cV-eKk"/>
+                                            <constraint firstAttribute="height" constant="50" id="zx1-vb-Ygt"/>
+                                        </constraints>
+                                        <state key="normal" title="Back to start"/>
+                                        <connections>
+                                            <action selector="backToStartPressed:" destination="Q4c-Mi-EJh" eventType="touchUpInside" id="k7t-kK-zpy"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="rxe-Jf-LvF" firstAttribute="centerX" secondItem="JWn-ls-fEb" secondAttribute="centerX" id="G6Y-bP-LQG"/>
+                                    <constraint firstItem="rxe-Jf-LvF" firstAttribute="top" secondItem="JWn-ls-fEb" secondAttribute="top" constant="8" id="IQD-mQ-219"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wc7-Ci-hgt"/>

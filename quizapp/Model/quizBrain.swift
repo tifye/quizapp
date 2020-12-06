@@ -29,7 +29,7 @@ class quizBrain {
 //            print(questions?.first?.question)
 //        }
         
-        //firstLaunch()
+        firstLaunch()
     }
     
     func setUser(withName name: String) {
@@ -350,8 +350,12 @@ extension quizBrain {
                 print("Creating categories")
                 createCategories()
                 
+            } else {
+                categories.forEach { (category) in
+                    print(category.name)
+                }
             }
-            print("Categories should exist")
+            
         } else {
             print("Creating categories")
             createCategories()
@@ -361,8 +365,10 @@ extension quizBrain {
                 print("Creating difficulties")
                 createDifficulties()
                 
+            }else {
+                print("Difficulties should exist")
             }
-            print("Difficulties should exist")
+            
         } else {
             print("Creating difficulties")
             createDifficulties()
@@ -371,8 +377,10 @@ extension quizBrain {
             if types.count <= 0 {
                 print("Creating Types")
                 createTypes()
+            } else {
+                print("Types should exist")
             }
-            print("Types should exist")
+            
         } else {
             print("Creating Types")
             createTypes()
@@ -383,13 +391,13 @@ extension quizBrain {
     func createCategories() {
         let categories = [
             Category(insertInto: context, id: 9, name: "General Knowledge"),
-            Category(insertInto: context, id: 10, name: "EnterTainment: Books"),
-            Category(insertInto: context, id: 11, name: "EnterTainment: Film"),
-            Category(insertInto: context, id: 12, name: "EnterTainment: Music"),
-            Category(insertInto: context, id: 13, name: "EnterTainment: Musicals & Theatres"),
-            Category(insertInto: context, id: 14, name: "EnterTainment: Television"),
-            Category(insertInto: context, id: 15, name: "EnterTainment: Video Games"),
-            Category(insertInto: context, id: 16, name: "EnterTainment: Board Games"),
+            Category(insertInto: context, id: 10, name: "Entertainment: Books"),
+            Category(insertInto: context, id: 11, name: "Entertainment: Film"),
+            Category(insertInto: context, id: 12, name: "Entertainment: Music"),
+            Category(insertInto: context, id: 13, name: "Entertainment: Musicals & Theatres"),
+            Category(insertInto: context, id: 14, name: "Entertainment: Television"),
+            Category(insertInto: context, id: 15, name: "Entertainment: Video Games"),
+            Category(insertInto: context, id: 16, name: "Entertainment: Board Games"),
             Category(insertInto: context, id: 17, name: "Science & Nature"),
             Category(insertInto: context, id: 18, name: "Science: Video Games"),
             Category(insertInto: context, id: 19, name: "Science: Mathematics"),
