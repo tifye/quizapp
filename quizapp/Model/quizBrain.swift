@@ -29,7 +29,7 @@ class quizBrain {
 //            print(questions?.first?.question)
 //        }
         
-        firstLaunch()
+        //firstLaunch()
     }
     
     func setUser(withName name: String) {
@@ -345,22 +345,38 @@ extension quizBrain {
     /// Database first initialize with Categories, Types and Difficulties
     func firstLaunch() {
         if let categories = fetchRequest(with: Category.fetchRequest()) {
-            print(categories)
+            print(categories.count)
+            if categories.count <= 0 {
+                print("Creating categories")
+                createCategories()
+                
+            }
+            print("Categories should exist")
         } else {
+            print("Creating categories")
             createCategories()
         }
         if let difficulties = fetchRequest(with: QuestionDifficulty.fetchRequest()) {
-            print(difficulties)
+            if difficulties.count <= 0 {
+                print("Creating difficulties")
+                createDifficulties()
+                
+            }
+            print("Difficulties should exist")
         } else {
+            print("Creating difficulties")
             createDifficulties()
         }
         if let types = fetchRequest(with: QuestionType.fetchRequest()) {
-            print(types)
+            if types.count <= 0 {
+                print("Creating Types")
+                createTypes()
+            }
+            print("Types should exist")
         } else {
+            print("Creating Types")
             createTypes()
         }
-        
-
         saveContext()
     }
     
@@ -391,6 +407,7 @@ extension quizBrain {
             Category(insertInto: context, id: 31, name: "Entertainment: Japanese Anime & Manga"),
             Category(insertInto: context, id: 32, name: "Entertainment: Cartoon & Animations")
         ]
+        saveContext()
     }
     
     func createDifficulties() {
@@ -399,6 +416,7 @@ extension quizBrain {
             QuestionDifficulty(insertInto: context, name: "medium"),
             QuestionDifficulty(insertInto: context, name: "hard")
         ]
+        saveContext()
     }
     
     func createTypes() {
@@ -406,5 +424,6 @@ extension quizBrain {
             QuestionType(insertInto: context, name: "multiple"),
             QuestionType(insertInto: context, name: "boolean")
         ]
+        saveContext()
     }
 }
