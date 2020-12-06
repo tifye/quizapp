@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class QuizBrain {
+class quizBrain {
     let context: NSManagedObjectContext!
     var questions: [Question]?
     var currentQuestion: Question?
@@ -22,7 +22,7 @@ class QuizBrain {
 }
 
 //MARK: - Handling API Requests
-extension QuizBrain {
+extension quizBrain {
 
     
     func fetchQuestions(with settings: QuizSettings, completion: @escaping (Bool) -> ()) {
@@ -114,7 +114,7 @@ extension QuizBrain {
 
 
 //MARK: - Database Managing
-extension QuizBrain {
+extension quizBrain {
     /// Generic function for fetchRequets. Includes error handling and printing
     func fetchRequest<T>(with request: NSFetchRequest<T>) -> [T]? {
         do {

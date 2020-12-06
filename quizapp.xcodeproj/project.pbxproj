@@ -13,6 +13,13 @@
 		42952390257D098C00FE042B /* quizapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4295238E257D098C00FE042B /* quizapp.xcdatamodeld */; };
 		42952392257D098D00FE042B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42952391257D098D00FE042B /* Assets.xcassets */; };
 		42952395257D098D00FE042B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42952393257D098D00FE042B /* LaunchScreen.storyboard */; };
+		429523A4257D1C0E00FE042B /* quizBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523A3257D1C0E00FE042B /* quizBrain.swift */; };
+		429523A7257D1C9E00FE042B /* tempQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523A6257D1C9E00FE042B /* tempQuestionModel.swift */; };
+		429523AA257D1D8100FE042B /* QuizSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523A9257D1D8100FE042B /* QuizSettingsModel.swift */; };
+		429523AD257D226300FE042B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523AC257D226300FE042B /* StartViewController.swift */; };
+		429523C5257D2D3B00FE042B /* QuestionDifficulty+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523C2257D2D3B00FE042B /* QuestionDifficulty+CoreDataClass.swift */; };
+		429523C6257D2D3B00FE042B /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523C3257D2D3B00FE042B /* Category+CoreDataClass.swift */; };
+		429523C7257D2D3B00FE042B /* QuestionType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523C4257D2D3B00FE042B /* QuestionType+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +31,13 @@
 		42952391257D098D00FE042B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42952394257D098D00FE042B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42952396257D098D00FE042B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		429523A3257D1C0E00FE042B /* quizBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizBrain.swift; sourceTree = "<group>"; };
+		429523A6257D1C9E00FE042B /* tempQuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempQuestionModel.swift; sourceTree = "<group>"; };
+		429523A9257D1D8100FE042B /* QuizSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSettingsModel.swift; sourceTree = "<group>"; };
+		429523AC257D226300FE042B /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		429523C2257D2D3B00FE042B /* QuestionDifficulty+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuestionDifficulty+CoreDataClass.swift"; sourceTree = "<group>"; };
+		429523C3257D2D3B00FE042B /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		429523C4257D2D3B00FE042B /* QuestionType+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuestionType+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +94,7 @@
 		4295239F257D1A2200FE042B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				429523AC257D226300FE042B /* StartViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -87,8 +102,22 @@
 		429523A1257D1A3B00FE042B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				429523C1257D2D3B00FE042B /* CoreDataModels */,
+				429523A3257D1C0E00FE042B /* quizBrain.swift */,
+				429523A6257D1C9E00FE042B /* tempQuestionModel.swift */,
+				429523A9257D1D8100FE042B /* QuizSettingsModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		429523C1257D2D3B00FE042B /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				429523C2257D2D3B00FE042B /* QuestionDifficulty+CoreDataClass.swift */,
+				429523C3257D2D3B00FE042B /* Category+CoreDataClass.swift */,
+				429523C4257D2D3B00FE042B /* QuestionType+CoreDataClass.swift */,
+			);
+			path = CoreDataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,9 +190,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				429523C6257D2D3B00FE042B /* Category+CoreDataClass.swift in Sources */,
+				429523A7257D1C9E00FE042B /* tempQuestionModel.swift in Sources */,
+				429523AD257D226300FE042B /* StartViewController.swift in Sources */,
+				429523AA257D1D8100FE042B /* QuizSettingsModel.swift in Sources */,
+				429523C5257D2D3B00FE042B /* QuestionDifficulty+CoreDataClass.swift in Sources */,
 				42952386257D098C00FE042B /* AppDelegate.swift in Sources */,
+				429523C7257D2D3B00FE042B /* QuestionType+CoreDataClass.swift in Sources */,
 				42952390257D098C00FE042B /* quizapp.xcdatamodeld in Sources */,
 				42952388257D098C00FE042B /* SceneDelegate.swift in Sources */,
+				429523A4257D1C0E00FE042B /* quizBrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="Integer 32" minValueString="9" maxValueString="32" usesScalarValueType="YES"/>
-        <attribute name="name" attributeType="String"/>
+    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="category">
+        <attribute name="id" optional="YES" attributeType="Integer 32" minValueString="9" maxValueString="32" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="category" inverseEntity="Question"/>
     </entity>
     <entity name="GameResult" representedClassName=".GameResult" syncable="YES" codeGenerationType="class">
@@ -19,15 +19,15 @@
     </entity>
     <entity name="Question" representedClassName=".Question" syncable="YES" codeGenerationType="class">
         <attribute name="correctAnswer" attributeType="String"/>
-        <attribute name="incorrectAnswers" attributeType="Transformable" customClassName="Array&lt;String&gt;"/>
+        <attribute name="incorrectAnswers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray"/>
         <attribute name="question" attributeType="String"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="questions" inverseEntity="Category"/>
         <relationship name="difficulty" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionDifficulty" inverseName="questions" inverseEntity="QuestionDifficulty"/>
         <relationship name="questionResults" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionResult" inverseName="question" inverseEntity="QuestionResult"/>
         <relationship name="type" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionType" inverseName="questions" inverseEntity="QuestionType"/>
     </entity>
-    <entity name="QuestionDifficulty" representedClassName=".QuestionDifficulty" syncable="YES" codeGenerationType="class">
-        <attribute name="name" attributeType="String"/>
+    <entity name="QuestionDifficulty" representedClassName=".QuestionDifficulty" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="difficulty" inverseEntity="Question"/>
     </entity>
     <entity name="QuestionResult" representedClassName=".QuestionResult" syncable="YES" codeGenerationType="class">
@@ -36,7 +36,7 @@
         <relationship name="gameResult" maxCount="1" deletionRule="Nullify" destinationEntity="GameResult" inverseName="questionResults" inverseEntity="GameResult"/>
         <relationship name="question" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question" inverseName="questionResults" inverseEntity="Question"/>
     </entity>
-    <entity name="QuestionType" representedClassName=".QuestionType" syncable="YES" codeGenerationType="class">
+    <entity name="QuestionType" representedClassName=".QuestionType" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="type" inverseEntity="Question"/>
     </entity>
