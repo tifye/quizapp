@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 32" minValueString="9" maxValueString="32" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="category" inverseEntity="Question"/>
+    </entity>
+    <entity name="GameResult" representedClassName=".GameResult" syncable="YES" codeGenerationType="class">
+        <attribute name="noCorrect" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="noQuestions" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="questionResults" toMany="YES" deletionRule="Nullify" destinationEntity="QuestionResult" inverseName="gameResult" inverseEntity="QuestionResult"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="gameResults" inverseEntity="Player"/>
+    </entity>
+    <entity name="Player" representedClassName=".Player" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="totalScore" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalTried" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="gameResults" toMany="YES" deletionRule="Nullify" destinationEntity="GameResult" inverseName="user" inverseEntity="GameResult"/>
+    </entity>
+    <entity name="Question" representedClassName=".Question" syncable="YES" codeGenerationType="class">
+        <attribute name="correctAnswer" attributeType="String"/>
+        <attribute name="incorrectAnswers" attributeType="Transformable" customClassName="Array&lt;String&gt;"/>
+        <attribute name="question" attributeType="String"/>
+        <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="questions" inverseEntity="Category"/>
+        <relationship name="difficulty" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionDifficulty" inverseName="questions" inverseEntity="QuestionDifficulty"/>
+        <relationship name="questionResults" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionResult" inverseName="question" inverseEntity="QuestionResult"/>
+        <relationship name="type" maxCount="1" deletionRule="Nullify" destinationEntity="QuestionType" inverseName="questions" inverseEntity="QuestionType"/>
+    </entity>
+    <entity name="QuestionDifficulty" representedClassName=".QuestionDifficulty" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="difficulty" inverseEntity="Question"/>
+    </entity>
+    <entity name="QuestionResult" representedClassName=".QuestionResult" syncable="YES" codeGenerationType="class">
+        <attribute name="pickedAnswer" attributeType="String"/>
+        <attribute name="wasCorrect" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="gameResult" maxCount="1" deletionRule="Nullify" destinationEntity="GameResult" inverseName="questionResults" inverseEntity="GameResult"/>
+        <relationship name="question" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question" inverseName="questionResults" inverseEntity="Question"/>
+    </entity>
+    <entity name="QuestionType" representedClassName=".QuestionType" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="type" inverseEntity="Question"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-54.9609375" positionY="-18.23046875" width="128" height="88"/>
+        <element name="Question" positionX="171.2421875" positionY="-85.859375" width="128" height="148"/>
+        <element name="QuestionDifficulty" positionX="266.98828125" positionY="230.6171875" width="128" height="73"/>
+        <element name="QuestionType" positionX="129.78125" positionY="239.41015625" width="128" height="73"/>
+        <element name="QuestionResult" positionX="158.46875" positionY="-338.55859375" width="128" height="103"/>
+        <element name="Player" positionX="-130.40234375" positionY="-505.44921875" width="128" height="103"/>
+        <element name="GameResult" positionX="-137.484375" positionY="-312.77734375" width="128" height="103"/>
+    </elements>
+</model>
