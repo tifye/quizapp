@@ -28,6 +28,8 @@ class quizBrain {
 //        fetchQuestion(withQuestion: "How many counties in the Republic of Ireland.") { (questions) in
 //            print(questions?.first?.question)
 //        }
+        
+        firstLaunch()
     }
     
     func setUser(withName name: String) {
@@ -341,45 +343,68 @@ extension quizBrain {
     
     //MARK: - First Launch
     /// Database first initialize with Categories, Types and Difficulties
-//    func firstLaunch() {
-//        let categories = [
-//            Category(insertInto: context, id: 9, name: "General Knowledge"),
-//            Category(insertInto: context, id: 10, name: "EnterTainment: Books"),
-//            Category(insertInto: context, id: 11, name: "EnterTainment: Film"),
-//            Category(insertInto: context, id: 12, name: "EnterTainment: Music"),
-//            Category(insertInto: context, id: 13, name: "EnterTainment: Musicals & Theatres"),
-//            Category(insertInto: context, id: 14, name: "EnterTainment: Television"),
-//            Category(insertInto: context, id: 15, name: "EnterTainment: Video Games"),
-//            Category(insertInto: context, id: 16, name: "EnterTainment: Board Games"),
-//            Category(insertInto: context, id: 17, name: "Science & Nature"),
-//            Category(insertInto: context, id: 18, name: "Science: Video Games"),
-//            Category(insertInto: context, id: 19, name: "Science: Mathematics"),
-//            Category(insertInto: context, id: 20, name: "Mythology"),
-//            Category(insertInto: context, id: 21, name: "Sports"),
-//            Category(insertInto: context, id: 22, name: "Geography"),
-//            Category(insertInto: context, id: 23, name: "History"),
-//            Category(insertInto: context, id: 24, name: "Politics"),
-//            Category(insertInto: context, id: 25, name: "Art"),
-//            Category(insertInto: context, id: 26, name: "Celebrities"),
-//            Category(insertInto: context, id: 27, name: "Animals"),
-//            Category(insertInto: context, id: 28, name: "Vehicles"),
-//            Category(insertInto: context, id: 29, name: "Entertainment: Comics"),
-//            Category(insertInto: context, id: 30, name: "Science: Gadgets"),
-//            Category(insertInto: context, id: 31, name: "Entertainment: Japanese Anime & Manga"),
-//            Category(insertInto: context, id: 32, name: "Entertainment: Cartoon & Animations")
-//        ]
-//
-//        let difficulties = [
-//            QuestionDifficulty(insertInto: context, name: "easy"),
-//            QuestionDifficulty(insertInto: context, name: "medium"),
-//            QuestionDifficulty(insertInto: context, name: "hard")
-//        ]
-//
-//        let types = [
-//            QuestionType(insertInto: context, name: "multiple"),
-//            QuestionType(insertInto: context, name: "boolean")
-//        ]
-//
-//        saveContext()
-//    }
+    func firstLaunch() {
+        if let categories = fetchRequest(with: Category.fetchRequest()) {
+            print(categories)
+        } else {
+            createCategories()
+        }
+        if let difficulties = fetchRequest(with: QuestionDifficulty.fetchRequest()) {
+            print(difficulties)
+        } else {
+            createDifficulties()
+        }
+        if let types = fetchRequest(with: QuestionType.fetchRequest()) {
+            print(types)
+        } else {
+            createTypes()
+        }
+        
+
+        saveContext()
+    }
+    
+    func createCategories() {
+        let categories = [
+            Category(insertInto: context, id: 9, name: "General Knowledge"),
+            Category(insertInto: context, id: 10, name: "EnterTainment: Books"),
+            Category(insertInto: context, id: 11, name: "EnterTainment: Film"),
+            Category(insertInto: context, id: 12, name: "EnterTainment: Music"),
+            Category(insertInto: context, id: 13, name: "EnterTainment: Musicals & Theatres"),
+            Category(insertInto: context, id: 14, name: "EnterTainment: Television"),
+            Category(insertInto: context, id: 15, name: "EnterTainment: Video Games"),
+            Category(insertInto: context, id: 16, name: "EnterTainment: Board Games"),
+            Category(insertInto: context, id: 17, name: "Science & Nature"),
+            Category(insertInto: context, id: 18, name: "Science: Video Games"),
+            Category(insertInto: context, id: 19, name: "Science: Mathematics"),
+            Category(insertInto: context, id: 20, name: "Mythology"),
+            Category(insertInto: context, id: 21, name: "Sports"),
+            Category(insertInto: context, id: 22, name: "Geography"),
+            Category(insertInto: context, id: 23, name: "History"),
+            Category(insertInto: context, id: 24, name: "Politics"),
+            Category(insertInto: context, id: 25, name: "Art"),
+            Category(insertInto: context, id: 26, name: "Celebrities"),
+            Category(insertInto: context, id: 27, name: "Animals"),
+            Category(insertInto: context, id: 28, name: "Vehicles"),
+            Category(insertInto: context, id: 29, name: "Entertainment: Comics"),
+            Category(insertInto: context, id: 30, name: "Science: Gadgets"),
+            Category(insertInto: context, id: 31, name: "Entertainment: Japanese Anime & Manga"),
+            Category(insertInto: context, id: 32, name: "Entertainment: Cartoon & Animations")
+        ]
+    }
+    
+    func createDifficulties() {
+        let difficulties = [
+            QuestionDifficulty(insertInto: context, name: "easy"),
+            QuestionDifficulty(insertInto: context, name: "medium"),
+            QuestionDifficulty(insertInto: context, name: "hard")
+        ]
+    }
+    
+    func createTypes() {
+        let types = [
+            QuestionType(insertInto: context, name: "multiple"),
+            QuestionType(insertInto: context, name: "boolean")
+        ]
+    }
 }

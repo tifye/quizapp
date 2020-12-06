@@ -20,7 +20,6 @@ class ResultQuestionTableViewCell: UITableViewCell {
         
         containerView.layer.cornerRadius = 5
         containerView.addShadowAndRoundedCorners()
-        containerView.clipsToBounds = true
     }
 
     
