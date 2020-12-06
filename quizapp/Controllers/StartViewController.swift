@@ -10,33 +10,30 @@ import UIKit
 class StartViewController: UIViewController {
 
     var quizBrain: quizBrain!
+    var quizSettings: QuizSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Initialize the apps core
         quizBrain = quizBrain()
+        
+        
     }
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
-        let settings = QuizSettings(nil, nil, nil, 5)
-        quizBrain.fetchQuestions(with: settings) { (success) in
-            if success {
-                print("Could Fetch Questions")
-            } else {
-                print("Could not Fetch Questions")
-            }
+        quizSettings = QuizSettings(nil, nil, nil, 5)
+        performSegue(withIdentifier: "startSegue", sender: self)
+    }
+    
+    
+     //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let startLaunchViewController = segue.destination as? StartLaunchViewController {
+            startLaunchViewController.quizbrain = quizBrain!
+            startLaunchViewController.quizSettings = quizSettings!
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
