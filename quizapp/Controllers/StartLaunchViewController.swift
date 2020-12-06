@@ -8,7 +8,7 @@
 import UIKit
 
 class StartLaunchViewController: UIViewController {
-    var quizbrain: quizBrain!
+    var qBrain: quizBrain!
     var quizSettings: QuizSettings!
     
     override func viewDidLoad() {
@@ -16,26 +16,26 @@ class StartLaunchViewController: UIViewController {
 
         navigationItem.hidesBackButton = true
         
-        quizbrain.startGame(with: quizSettings) { (wasSuccessful) in
+        qBrain.startGame(with: quizSettings) { (wasSuccessful) in
             if wasSuccessful {
                 print("Startup was sucessful. Moving to first question")
-                
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "questionSegue", sender: self)
                 }
             } else {
                 print("Something went wrong... returning to start screen")
-                self.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
     }
     
 
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let questionViewController = segue.destination as? QuestionViewController {
-            questionViewController.quizBrain = quizbrain
+            questionViewController.qBrain = qBrain
         }
     }
 }

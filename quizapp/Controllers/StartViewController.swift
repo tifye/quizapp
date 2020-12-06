@@ -9,16 +9,14 @@ import UIKit
 
 class StartViewController: UIViewController {
 
-    var quizBrain: quizBrain!
+    var qBrain: quizBrain!
     var quizSettings: QuizSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Initialize the apps core
-        quizBrain = quizBrain()
-        
-        
+        qBrain = quizBrain()
     }
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
@@ -30,7 +28,7 @@ class StartViewController: UIViewController {
      //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let startLaunchViewController = segue.destination as? StartLaunchViewController {
-            startLaunchViewController.quizbrain = quizBrain!
+            startLaunchViewController.qBrain = qBrain!
             startLaunchViewController.quizSettings = quizSettings!
         }
     }

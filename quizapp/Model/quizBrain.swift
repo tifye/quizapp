@@ -14,6 +14,9 @@ class quizBrain {
     var questions: [Question]?
     var currentQuestion: Question?
     var currentQuestionIndex: Int?
+    var settings: QuizSettings?
+    
+    var gameResults: GameResult?
     
     init() {
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -26,19 +29,91 @@ class quizBrain {
     }
     
     func startGame(with settings: QuizSettings, completion: @escaping (Bool) -> ()) {
+        print("Starting game")
+        
         // Empty all questions
         questions?.removeAll()
+        self.settings = settings
+        self.gameResults = GameResult(context: context)
         
         fetchQuestions(with: settings) { [weak self] (wasSuccessful) in
             if wasSuccessful {
-                self?.currentQuestionIndex = 0
-                self?.currentQuestion = self?.questions![(self?.currentQuestionIndex)!]
+                self?.currentQuestionIndex = -1
+                completion(wasSuccessful)
             } else {
-                completion(false)
+                completion(wasSuccessful)
             }
         }
     }
     
+    
+    func endGame() -> GameResult {
+        let gameResults = GameResult(context: context)
+        return gameResults
+    }
+    
+    
+    /// Does the game have more questions
+    func hasMoreQuestions() -> Bool {
+        if questions != nil, currentQuestion != nil, currentQuestionIndex!+1 < questions!.count{
+            print("\(currentQuestionIndex!+1)/\(questions!.count)")
+            return true
+        }
+        return false
+    }
+    
+    func resetGame() {
+        currentQuestionIndex = nil
+        currentQuestion = nil
+        questions?.removeAll()
+        questions = nil
+        gameResults = nil
+    }
+    
+    
+    /// Checks the given answer to the current question in play
+    func validateAnswer(_ answer: String) -> Bool {
+        if currentQuestion != nil {
+            if answer == currentQuestion?.correctAnswer {
+                
+                return true
+            }
+        }
+        return false
+    }
+    
+    /// Gets the current question
+    func getQuestion() -> String? {
+        return currentQuestion?.question?.htmlDecoded
+    }
+    
+    /// Gets the current question's incorrect answers
+    func getWrongAnswers() -> [String]? {
+        if let wrongAnsers = currentQuestion?.incorrectAnswers as? [String] { // If there are wrong answers
+            var wrongsAnswersDecoded: [String] = []
+            wrongAnsers.forEach { (wrongAnswer) in // Loop through each wrong answer
+                if let decodedString = wrongAnswer.htmlDecoded { // I able to decode it
+                    wrongsAnswersDecoded.append(decodedString) // Append to list of wrong answers
+                } else {
+                    return
+                }
+            }
+            return wrongsAnswersDecoded
+        } else {
+            return nil
+        }
+    }
+    
+    /// Gets the current question's correct answer
+    func getRightAnswer() -> String? {
+        if let decodedString = currentQuestion?.correctAnswer?.htmlDecoded {
+            return decodedString
+        } else {
+            return nil
+        }
+    }
+    
+    /// Move to and returns the next question
     func getNextQuestion() -> Question? {
         guard currentQuestionIndex != nil, questions != nil, (currentQuestionIndex!+1) < questions!.count
         else { return nil }
@@ -54,6 +129,8 @@ class quizBrain {
 extension quizBrain {
     
     func fetchQuestions(with settings: QuizSettings, completion: @escaping (Bool) -> ()) {
+        print("Fetching questions")
+        
         guard let url = buildApiUrl(with: settings) else {
             print("Could not build API URL")
             return
@@ -74,27 +151,29 @@ extension quizBrain {
     }
     
     func parseApiResults(_ results: TempQuestionsResult?) -> Bool {
+        print("Parsing API results")
+        
         guard let results = results?.results else { return false }
         
         for i in 0..<results.count {
             // Check if question alreadying in database
-            if let question = fetchQuestion(withQuestion: results[1].question)?.first {
+            if let question = fetchQuestion(withQuestion: results[i].question)?.first {
                 self.questions?.append(question)
                 continue
             }
             
             // Category Setup
             // Category Attributes
-            guard let category = fetchCategory(withName: results[1].category)?.first else {
-                print("No such Category: \(results[1].category)")
+            guard let category = fetchCategory(withName: results[i].category)?.first else {
+                print("No such Category: \(results[i].category)")
                 return false
             }
-            guard let difficulty = fetchQuestionDifficulty(withName: results[0].difficulty.rawValue)?.first else {
-                print("No such QuestionDifficulty: \(results[0].difficulty.rawValue))")
+            guard let difficulty = fetchQuestionDifficulty(withName: results[i].difficulty.rawValue)?.first else {
+                print("No such QuestionDifficulty: \(results[i].difficulty.rawValue))")
                 return false
             }
-            guard let type = fetchQuestionType(withName: results[0].type.rawValue)?.first else {
-                print("No such QuestionDifficulty: \(results[0].type.rawValue))")
+            guard let type = fetchQuestionType(withName: results[i].type.rawValue)?.first else {
+                print("No such QuestionDifficulty: \(results[i].type.rawValue))")
                 return false
             }
             
@@ -116,6 +195,7 @@ extension quizBrain {
             
             saveContext()
             questions?.append(question)
+            print("Question Added")
         }
         
         return true

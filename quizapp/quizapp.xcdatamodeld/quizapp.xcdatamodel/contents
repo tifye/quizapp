@@ -30,7 +30,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="difficulty" inverseEntity="Question"/>
     </entity>
-    <entity name="QuestionResult" representedClassName=".QuestionResult" syncable="YES" codeGenerationType="class">
+    <entity name="QuestionResult" representedClassName=".QuestionResult" syncable="YES" codeGenerationType="category">
         <attribute name="pickedAnswer" attributeType="String"/>
         <attribute name="wasCorrect" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="gameResult" maxCount="1" deletionRule="Nullify" destinationEntity="GameResult" inverseName="questionResults" inverseEntity="GameResult"/>
@@ -42,11 +42,11 @@
     </entity>
     <elements>
         <element name="Category" positionX="-54.9609375" positionY="-18.23046875" width="128" height="88"/>
+        <element name="GameResult" positionX="-137.484375" positionY="-312.77734375" width="128" height="103"/>
+        <element name="Player" positionX="-130.40234375" positionY="-505.44921875" width="128" height="103"/>
         <element name="Question" positionX="171.2421875" positionY="-85.859375" width="128" height="148"/>
         <element name="QuestionDifficulty" positionX="266.98828125" positionY="230.6171875" width="128" height="73"/>
-        <element name="QuestionType" positionX="129.78125" positionY="239.41015625" width="128" height="73"/>
         <element name="QuestionResult" positionX="158.46875" positionY="-338.55859375" width="128" height="103"/>
-        <element name="Player" positionX="-130.40234375" positionY="-505.44921875" width="128" height="103"/>
-        <element name="GameResult" positionX="-137.484375" positionY="-312.77734375" width="128" height="103"/>
+        <element name="QuestionType" positionX="129.78125" positionY="239.41015625" width="128" height="73"/>
     </elements>
 </model>

@@ -80,7 +80,7 @@
         <!--Question View Controller-->
         <scene sceneID="bWt-qT-XG9">
             <objects>
-                <viewController id="4Vn-VI-PCM" customClass="QuestionViewController" customModule="quizapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="questionViewController" id="4Vn-VI-PCM" customClass="QuestionViewController" customModule="quizapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wpM-gc-TPV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,6 +117,9 @@
                                                         <state key="normal" title="Button">
                                                             <color key="titleColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="answerPressed:" destination="4Vn-VI-PCM" eventType="touchUpInside" id="6Ts-uq-zzT"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="aAD-ZI-Z5V">
                                                         <rect key="frame" x="187" y="0.0" width="179" height="176"/>
@@ -124,6 +127,9 @@
                                                         <state key="normal" title="Button">
                                                             <color key="titleColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="answerPressed:" destination="4Vn-VI-PCM" eventType="touchUpInside" id="r8s-wo-xhZ"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -136,6 +142,9 @@
                                                         <state key="normal" title="Button">
                                                             <color key="titleColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="answerPressed:" destination="4Vn-VI-PCM" eventType="touchUpInside" id="agr-42-bja"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xMX-2h-tlz">
                                                         <rect key="frame" x="187" y="0.0" width="179" height="176"/>
@@ -143,6 +152,9 @@
                                                         <state key="normal" title="Button">
                                                             <color key="titleColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="answerPressed:" destination="4Vn-VI-PCM" eventType="touchUpInside" id="4vS-oh-QYh"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -162,6 +174,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="Dfy-DR-q7U"/>
                     <connections>
+                        <outlet property="AButton" destination="6GE-IF-CRT" id="2fE-6H-Yiw"/>
+                        <outlet property="BButton" destination="aAD-ZI-Z5V" id="A8z-p4-UmF"/>
+                        <outlet property="CButton" destination="s6w-hR-aFI" id="fIM-da-NAN"/>
+                        <outlet property="DButton" destination="xMX-2h-tlz" id="95L-JB-qHz"/>
+                        <outlet property="questionLabel" destination="gJv-ei-Avl" id="ErI-tj-giF"/>
                         <segue destination="Q4c-Mi-EJh" kind="show" identifier="resultsSegue" id="hiA-o2-S1o"/>
                     </connections>
                 </viewController>
@@ -216,20 +233,20 @@
             </objects>
             <point key="canvasLocation" x="-46" y="139"/>
         </scene>
-        <!--View Controller-->
+        <!--Results View Controller-->
         <scene sceneID="R8r-XG-uyB">
             <objects>
-                <viewController id="Q4c-Mi-EJh" sceneMemberID="viewController">
+                <viewController id="Q4c-Mi-EJh" customClass="ResultsViewController" customModule="quizapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ocV-Vd-I1M">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="29p-5v-no4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="29p-5v-no4">
                                 <rect key="frame" x="0.0" y="407" width="414" height="489"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultsReuseableCell" rowHeight="113" id="GIh-6l-waT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResultsReuseableCell" rowHeight="113" id="GIh-6l-waT" customClass="ResultQuestionTableViewCell" customModule="quizapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="right" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GIh-6l-waT" id="lGJ-WJ-dgQ">
@@ -272,6 +289,11 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="pth-2l-vOj" secondAttribute="trailing" constant="8" id="rSP-NC-gEA"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="correctAnswerLabel" destination="NCl-aD-ebt" id="JcA-6u-pWg"/>
+                                            <outlet property="questionLabel" destination="g07-2R-vq3" id="qdy-pE-qyk"/>
+                                            <outlet property="userAnswerLabel" destination="LPl-bV-uTb" id="fIl-VK-Y4a"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -285,6 +307,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Yju-Qd-n57"/>
+                    <connections>
+                        <outlet property="questionsTableView" destination="29p-5v-no4" id="Scq-2v-Pyf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMQ-mh-SE0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
