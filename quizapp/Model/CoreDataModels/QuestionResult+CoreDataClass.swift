@@ -11,9 +11,11 @@ import CoreData
 
 @objc(QuestionResult)
 public class QuestionResult: NSManagedObject {
-    convenience public init(insertInto context: NSManagedObjectContext!, pickedAnswer: String, wasCorrect: Bool, gameResult: GameResult, question: Question) {
+    convenience public init(insertInto context: NSManagedObjectContext!,
+                            pickedAnswer: String, wasCorrect: Bool, question: Question) {
         let entity = NSEntityDescription.entity(forEntityName: "QuestionResult", in: context)!
         self.init(entity: entity, insertInto: context)
+        
         self.pickedAnswer = pickedAnswer
         self.wasCorrect = wasCorrect
         self.gameResult = gameResult

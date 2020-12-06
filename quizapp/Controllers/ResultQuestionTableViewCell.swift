@@ -13,9 +13,14 @@ class ResultQuestionTableViewCell: UITableViewCell {
     @IBOutlet weak var userAnswerLabel: UILabel!
     @IBOutlet weak var correctAnswerLabel: UILabel!
     
+    @IBOutlet weak var containerView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        containerView.layer.cornerRadius = 5
+        containerView.addShadowAndRoundedCorners()
+        containerView.clipsToBounds = true
     }
 
     

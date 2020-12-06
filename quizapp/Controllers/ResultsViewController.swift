@@ -9,6 +9,11 @@ import UIKit
 
 class ResultsViewController: UIViewController {
 
+    @IBOutlet weak var playerNameLabel: UILabel!
+    @IBOutlet weak var playerTotalScoreLabel: UILabel!
+    @IBOutlet weak var gameScoreLabel: UILabel!
+    
+    @IBOutlet weak var bgImageBottom: UIImageView!
     var gameResults: GameResult!
     
     @IBOutlet weak var questionsTableView: UITableView!
@@ -16,10 +21,15 @@ class ResultsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bgImageBottom.addBlur(0.8)
         navigationItem.hidesBackButton = true
         
         questionsTableView.delegate = self
         questionsTableView.dataSource = self
+        
+        playerNameLabel.text = gameResults.user?.name
+        playerTotalScoreLabel.text = "\(gameResults.user?.totalScore ?? 0)/\(gameResults.user?.totalTried ?? 0)"
+        gameScoreLabel.text = "\(gameResults.noCorrect)/\(gameResults.noQuestions)"
     }
     
 

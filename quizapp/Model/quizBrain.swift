@@ -13,9 +13,11 @@ class quizBrain {
     let context: NSManagedObjectContext!
     var questions: [Question]?
     var currentQuestion: Question?
+    var noCorrectAnswers: Int?
     var currentQuestionIndex: Int?
     var settings: QuizSettings?
     
+    var currentPlayer: Player?
     var gameResults: GameResult?
     
     init() {
@@ -28,17 +30,38 @@ class quizBrain {
 //        }
     }
     
+    func setUser(withName name: String) {
+        if let user = fetchUser(withName: name)?.first {
+            currentPlayer = user
+            return
+        }
+        
+        let player = Player(context: context)
+        player.name = name
+        player.totalScore = 0
+        player.totalTried = 0
+        
+        saveContext()
+        currentPlayer = player
+    }
+    
     func startGame(with settings: QuizSettings, completion: @escaping (Bool) -> ()) {
+        guard currentPlayer != nil else {
+            completion(false)
+            return
+        }
         print("Starting game")
         
         // Empty all questions
         questions?.removeAll()
         self.settings = settings
         self.gameResults = GameResult(context: context)
+        self.gameResults!.user = currentPlayer
         
         fetchQuestions(with: settings) { [weak self] (wasSuccessful) in
             if wasSuccessful {
                 self?.currentQuestionIndex = -1
+                self?.noCorrectAnswers = 0
                 completion(wasSuccessful)
             } else {
                 completion(wasSuccessful)
@@ -48,8 +71,14 @@ class quizBrain {
     
     
     func endGame() -> GameResult {
-        let gameResults = GameResult(context: context)
-        return gameResults
+        let numberOfQuestions = questions?.count
+        let numberOfCorrectAnswers = noCorrectAnswers
+        gameResults?.noQuestions = Int32(numberOfQuestions!)
+        gameResults?.user?.totalScore += Int32(numberOfCorrectAnswers!)
+        gameResults?.user?.totalTried += Int32(numberOfQuestions!)
+        
+        saveContext()
+        return gameResults!
     }
     
     
@@ -75,10 +104,22 @@ class quizBrain {
     func validateAnswer(_ answer: String) -> Bool {
         if currentQuestion != nil {
             if answer == currentQuestion?.correctAnswer {
-                
+                noCorrectAnswers! += 1
+                let questionResult = QuestionResult(insertInto: context,
+                                                    pickedAnswer: answer,
+                                                    wasCorrect: true,
+                                                    question: currentQuestion!)
+                gameResults?.addToQuestionResults(questionResult)
+                saveContext()
                 return true
             }
         }
+        let questionResult = QuestionResult(insertInto: context,
+                                            pickedAnswer: answer,
+                                            wasCorrect: true,
+                                            question: currentQuestion!)
+        gameResults?.addToQuestionResults(questionResult)
+        saveContext()
         return false
     }
     
@@ -227,6 +268,14 @@ extension quizBrain {
             print("Error fetching data from context: \(error)")
             return nil
         }
+    }
+    
+    /// Fetch user by name
+    func fetchUser(withName name: String) -> [Player]? {
+        let request: NSFetchRequest<Player> = Player.fetchRequest()
+        request.predicate = NSPredicate(format: "%K = %@", "name", "\(name)")
+        
+        return fetchRequest(with: request)
     }
     
     /// Fetch a category synchronously by id

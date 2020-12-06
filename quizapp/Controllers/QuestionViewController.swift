@@ -18,11 +18,13 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var CButton: UIButton!
     @IBOutlet weak var DButton: UIButton!
     
+    @IBOutlet weak var bgImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
-        
+        bgImage.addBlur(0.85)
         
         // Setup Question
         var _ = qBrain.getNextQuestion()
