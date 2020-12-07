@@ -29,6 +29,8 @@ class quizBrain {
 //            print(questions?.first?.question)
 //        }
         
+        settings = QuizSettings(nil, nil, nil, 1)
+        
         firstLaunch()
     }
     
@@ -47,7 +49,7 @@ class quizBrain {
         currentPlayer = player
     }
     
-    func startGame(with settings: QuizSettings, completion: @escaping (Bool) -> ()) {
+    func startGame(completion: @escaping (Bool) -> ()) {
         guard currentPlayer != nil else {
             completion(false)
             return
@@ -56,11 +58,10 @@ class quizBrain {
         
         // Empty all questions
         questions?.removeAll()
-        self.settings = settings
         self.gameResults = GameResult(context: context)
         self.gameResults!.user = currentPlayer
         
-        fetchQuestions(with: settings) { [weak self] (wasSuccessful) in
+        fetchQuestions(with: self.settings!) { [weak self] (wasSuccessful) in
             if wasSuccessful {
                 self?.currentQuestionIndex = -1
                 self?.noCorrectAnswers = 0
@@ -177,6 +178,7 @@ extension quizBrain {
         
         guard let url = buildApiUrl(with: settings) else {
             print("Could not build API URL")
+            completion(false)
             return
         }
         
@@ -247,11 +249,11 @@ extension quizBrain {
     
     func buildApiUrl(with settings: QuizSettings) -> URL? {
         let amount = (settings.amount == nil) ? 5 : settings.amount
-        let category = (settings.category == nil) ? "" : settings.category?.name
+        let category = (settings.category == nil) ? "" : "\(settings.category!.id)"
         let diffcutly = (settings.difficulty == nil) ? "medium" : settings.difficulty.name
         let type = (settings.type == nil) ? "multiple" : settings.type.name
         
-        if let url = URL(string:"https://opentdb.com/api.php?amount=\(amount!)&category=\(category!)&difficulty=\(diffcutly!)&type=\(type!)") {
+        if let url = URL(string:"https://opentdb.com/api.php?amount=\(amount!)&category=\(category)&difficulty=\(diffcutly!)&type=\(type!)") {
             print(url.absoluteURL)
             return url
         } else {
@@ -295,6 +297,12 @@ extension quizBrain {
         
         return fetchRequest(with: request)
     }
+    func fetchCategory(completion: @escaping ([Category]?) -> ()) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            completion(self?.fetchRequest(with: Category.fetchRequest()))
+        }
+    }
+    
     /// Fetch a QuestionDifficulty synchronously by name
     func fetchQuestionDifficulty(withName name: String) -> [QuestionDifficulty]? {
         let request: NSFetchRequest<QuestionDifficulty> = QuestionDifficulty.fetchRequest()
@@ -302,6 +310,13 @@ extension quizBrain {
         
         return fetchRequest(with: request)
     }
+    func fetchQuestionDifficulty(completion: @escaping ([QuestionDifficulty]?) -> ()) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            completion(self?.fetchRequest(with: QuestionDifficulty.fetchRequest()))
+        }
+    }
+    
+    
     /// Fetch a QuestionType synchronously by name
     func fetchQuestionType(withName name: String) -> [QuestionType]? {
         let request: NSFetchRequest<QuestionType> = QuestionType.fetchRequest()
@@ -309,7 +324,12 @@ extension quizBrain {
         
         return fetchRequest(with: request)
     }
-    
+    func fetchQuestionType(completion: @escaping ([QuestionType]?) -> ()) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            completion(self?.fetchRequest(with: QuestionType.fetchRequest()))
+        }
+    }
+
     /// Fetch a Question synchronously by question
     func fetchQuestion(withQuestion question: String) -> [Question]? {
         let request: NSFetchRequest<Question> = Question.fetchRequest()
@@ -351,10 +371,6 @@ extension quizBrain {
                 print("Creating categories")
                 createCategories()
                 
-            } else {
-                categories.forEach { (category) in
-                    print(category.name)
-                }
             }
             
         } else {
@@ -365,9 +381,6 @@ extension quizBrain {
             if difficulties.count <= 0 {
                 print("Creating difficulties")
                 createDifficulties()
-                
-            }else {
-                print("Difficulties should exist")
             }
             
         } else {
@@ -378,10 +391,7 @@ extension quizBrain {
             if types.count <= 0 {
                 print("Creating Types")
                 createTypes()
-            } else {
-                print("Types should exist")
             }
-            
         } else {
             print("Creating Types")
             createTypes()
@@ -390,7 +400,7 @@ extension quizBrain {
     }
     
     func createCategories() {
-        let categories = [
+        _ = [
             Category(insertInto: context, id: 9, name: "General Knowledge"),
             Category(insertInto: context, id: 10, name: "Entertainment: Books"),
             Category(insertInto: context, id: 11, name: "Entertainment: Film"),
@@ -420,7 +430,7 @@ extension quizBrain {
     }
     
     func createDifficulties() {
-        let difficulties = [
+        _ = [
             QuestionDifficulty(insertInto: context, name: "easy"),
             QuestionDifficulty(insertInto: context, name: "medium"),
             QuestionDifficulty(insertInto: context, name: "hard")
@@ -429,7 +439,7 @@ extension quizBrain {
     }
     
     func createTypes() {
-        let types = [
+        _ = [
             QuestionType(insertInto: context, name: "multiple"),
             QuestionType(insertInto: context, name: "boolean")
         ]

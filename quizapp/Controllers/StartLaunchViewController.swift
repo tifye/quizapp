@@ -9,14 +9,13 @@ import UIKit
 
 class StartLaunchViewController: UIViewController {
     var qBrain: quizBrain!
-    var quizSettings: QuizSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.hidesBackButton = true
         
-        qBrain.startGame(with: quizSettings) { (wasSuccessful) in
+        qBrain.startGame() { (wasSuccessful) in
             if wasSuccessful {
                 print("Startup was sucessful. Moving to first question")
                 DispatchQueue.main.async {

@@ -10,7 +10,6 @@ import UIKit
 class StartViewController: UIViewController {
 
     var qBrain: quizBrain!
-    var quizSettings: QuizSettings!
     
     @IBOutlet weak var playernameLabel: UILabel!
     @IBOutlet weak var playerScore: UILabel!
@@ -34,7 +33,6 @@ class StartViewController: UIViewController {
     }
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
-        quizSettings = QuizSettings(nil, nil, nil, 5)
         performSegue(withIdentifier: "startSegue", sender: self)
     }
     
@@ -43,7 +41,10 @@ class StartViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let startLaunchViewController = segue.destination as? StartLaunchViewController {
             startLaunchViewController.qBrain = qBrain!
-            startLaunchViewController.quizSettings = quizSettings!
+        }
+        
+        if let settingsViewController = segue.destination as? SettingsViewController {
+            settingsViewController.qBrain = qBrain
         }
     }
     
