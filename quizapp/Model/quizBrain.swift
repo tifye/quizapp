@@ -76,6 +76,7 @@ class quizBrain {
         let numberOfQuestions = questions?.count
         let numberOfCorrectAnswers = noCorrectAnswers
         gameResults?.noQuestions = Int32(numberOfQuestions!)
+        gameResults?.noCorrect = Int32(numberOfQuestions!)
         gameResults?.user?.totalScore += Int32(numberOfCorrectAnswers!)
         gameResults?.user?.totalTried += Int32(numberOfQuestions!)
         
@@ -118,7 +119,7 @@ class quizBrain {
         }
         let questionResult = QuestionResult(insertInto: context,
                                             pickedAnswer: answer,
-                                            wasCorrect: true,
+                                            wasCorrect: false,
                                             question: currentQuestion!)
         gameResults?.addToQuestionResults(questionResult)
         saveContext()

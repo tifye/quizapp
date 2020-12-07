@@ -24,6 +24,8 @@ class StartViewController: UIViewController {
         
         if let username = UserDefaults.standard.string(forKey: "Username") {
             setUser(withName: username)
+        } else if let user = qBrain.currentPlayer {
+            setUser(withName: user.name!)
         }
         
         bgImage.addBlur(0.5)
