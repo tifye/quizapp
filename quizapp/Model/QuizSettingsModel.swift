@@ -8,10 +8,10 @@
 import Foundation
 
 struct QuizSettings {
-    let difficulty: QuestionDifficulty!
-    let amount: Int!
-    let type: QuestionType!
-    let category: Category?
+    var difficulty: QuestionDifficulty!
+    var amount: Int!
+    var type: QuestionType!
+    var category: Category?
     
     init(_ difficulty: QuestionDifficulty?, _ type: QuestionType?, _ category: Category?, _ amount: Int?) {
         self.difficulty = difficulty

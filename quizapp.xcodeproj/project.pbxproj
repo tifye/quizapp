@@ -26,6 +26,7 @@
 		429523DB257D77B400FE042B /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523DA257D77B400FE042B /* ResultsViewController.swift */; };
 		429523DF257D7D6400FE042B /* ResultQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429523DE257D7D6400FE042B /* ResultQuestionTableViewCell.swift */; };
 		42A669CE257D7FD50074CF69 /* QuestionResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A669CC257D7FD50074CF69 /* QuestionResult+CoreDataClass.swift */; };
+		42A669D5257E968C0074CF69 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A669D4257E968C0074CF69 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		429523DA257D77B400FE042B /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		429523DE257D7D6400FE042B /* ResultQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		42A669CC257D7FD50074CF69 /* QuestionResult+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionResult+CoreDataClass.swift"; sourceTree = "<group>"; };
+		42A669D4257E968C0074CF69 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				429523D2257D672000FE042B /* QuestionViewController.swift */,
 				429523DA257D77B400FE042B /* ResultsViewController.swift */,
 				429523DE257D7D6400FE042B /* ResultQuestionTableViewCell.swift */,
+				42A669D4257E968C0074CF69 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				429523C5257D2D3B00FE042B /* QuestionDifficulty+CoreDataClass.swift in Sources */,
 				429523D7257D6E0500FE042B /* extensions.swift in Sources */,
 				42952386257D098C00FE042B /* AppDelegate.swift in Sources */,
+				42A669D5257E968C0074CF69 /* SettingsViewController.swift in Sources */,
 				429523C7257D2D3B00FE042B /* QuestionType+CoreDataClass.swift in Sources */,
 				42952390257D098C00FE042B /* quizapp.xcdatamodeld in Sources */,
 				42952388257D098C00FE042B /* SceneDelegate.swift in Sources */,
