@@ -46,6 +46,13 @@ class SettingsViewController: UIViewController, NSFetchedResultsControllerDelega
         initializeFetchedResultsController()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let selectedCategory = qBrain.settings?.category {
+            let indexPath = fetchedResultsController.indexPath(forObject: selectedCategory)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
+    
     func initializeFetchedResultsController() {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -89,7 +96,7 @@ class SettingsViewController: UIViewController, NSFetchedResultsControllerDelega
     }
 }
 
-
+//MARK: - TableViewDelegate
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.fetchedObjects?.count ?? 0

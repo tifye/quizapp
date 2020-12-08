@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		424B964E257F39B20089B768 /* HighscoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424B964D257F39B20089B768 /* HighscoresTableViewController.swift */; };
 		42952386257D098C00FE042B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42952385257D098C00FE042B /* AppDelegate.swift */; };
 		42952388257D098C00FE042B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42952387257D098C00FE042B /* SceneDelegate.swift */; };
 		4295238D257D098C00FE042B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4295238B257D098C00FE042B /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		424B964D257F39B20089B768 /* HighscoresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoresTableViewController.swift; sourceTree = "<group>"; };
 		42952382257D098C00FE042B /* quizapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quizapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42952385257D098C00FE042B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42952387257D098C00FE042B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				429523DA257D77B400FE042B /* ResultsViewController.swift */,
 				429523DE257D7D6400FE042B /* ResultQuestionTableViewCell.swift */,
 				42A669D4257E968C0074CF69 /* SettingsViewController.swift */,
+				424B964D257F39B20089B768 /* HighscoresTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				429523AA257D1D8100FE042B /* QuizSettingsModel.swift in Sources */,
 				42A669CE257D7FD50074CF69 /* QuestionResult+CoreDataClass.swift in Sources */,
 				429523C5257D2D3B00FE042B /* QuestionDifficulty+CoreDataClass.swift in Sources */,
+				424B964E257F39B20089B768 /* HighscoresTableViewController.swift in Sources */,
 				429523D7257D6E0500FE042B /* extensions.swift in Sources */,
 				42952386257D098C00FE042B /* AppDelegate.swift in Sources */,
 				42A669D5257E968C0074CF69 /* SettingsViewController.swift in Sources */,
