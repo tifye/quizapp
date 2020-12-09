@@ -77,7 +77,7 @@ class quizBrain {
         let numberOfQuestions = questions?.count
         let numberOfCorrectAnswers = noCorrectAnswers
         gameResults?.noQuestions = Int32(numberOfQuestions!)
-        gameResults?.noCorrect = Int32(numberOfQuestions!)
+        gameResults?.noCorrect = Int32(noCorrectAnswers!)
         gameResults?.user?.totalScore += Int32(numberOfCorrectAnswers!)
         gameResults?.user?.totalTried += Int32(numberOfQuestions!)
         
